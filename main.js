@@ -14,6 +14,7 @@ function getData(link, funct, method) {
 }
 
 function showData(dataSet) {
+  console.log(dataSet);
   showInTable(dataSet);
 }
 
@@ -54,6 +55,7 @@ function showInTable(array) {
 let getdata = document.getElementById('getdata');
 
 getdata.addEventListener('click', () => {
+  console.log('hlola');
   let showEventsLink = 'http://localhost:3000/api/v1/events';
   getData(showEventsLink, showData, method.get);
 });
