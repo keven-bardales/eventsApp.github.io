@@ -23,7 +23,7 @@ export const createEvent = async (req, res) => {
     } = req.body;
 
     const [rows] = await pool.query(
-      'INSERT INTO db_event_agenda.tbl_events (name, description, start_time, end_time, cost, id_location, id_category, id_main_organizer) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO tbl_events (name, description, start_time, end_time, cost, id_location, id_category, id_main_organizer) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       [
         name,
         description,
@@ -56,7 +56,7 @@ export const updateEvent = async (req, res) => {
     } = req.body;
 
     const rows = await pool.query(
-      'UPDATE db_event_agenda.tbl_events SET name = ?, description = ?, start_time = ?, end_time = ?, cost = ?, id_location = ?, id_category = ?, id_main_organizer = ? WHERE id = ?',
+      'UPDATE tbl_events SET name = ?, description = ?, start_time = ?, end_time = ?, cost = ?, id_location = ?, id_category = ?, id_main_organizer = ? WHERE id = ?',
       [
         name,
         description,

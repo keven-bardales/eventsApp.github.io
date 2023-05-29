@@ -2,9 +2,7 @@ import { pool } from '../dataBase.js';
 
 export const getEventUsers = async (req, res) => {
   try {
-    const [rows] = await pool.query(
-      'SELECT * FROM db_event_agenda.tbl_event_users'
-    );
+    const [rows] = await pool.query('SELECT * FROM tbl_event_users');
     res.status(200).json(rows);
   } catch (err) {
     console.error(err);
@@ -16,7 +14,7 @@ export const createEventUser = async (req, res) => {
   try {
     const { id_event, id_user, confirmed } = req.body;
     const [rows] = await pool.query(
-      'INSERT INTO db_event_agenda.tbl_event_users (id_event, id_user, confirmed) VALUES (?,?, ?)',
+      'INSERT INTO tbl_event_users (id_event, id_user, confirmed) VALUES (?,?, ?)',
       [id_event, id_user, confirmed]
     );
     res.status(200).json(rows);
@@ -31,7 +29,7 @@ export const updateEventUser = async (req, res) => {
     const { id_event, id_user } = req.params;
     const { confirmed } = req.body;
     const [rows] = await pool.query(
-      'UPDATE db_event_agenda.tbl_event_users SET confirmed = ? WHERE id_event = ? AND id_user = ?',
+      'UPDATE tbl_event_users SET confirmed = ? WHERE id_event = ? AND id_user = ?',
       [confirmed, id_event, id_user]
     );
     res.status(200).json(rows);
@@ -44,10 +42,7 @@ export const updateEventUser = async (req, res) => {
 export const deleteEventUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const [rows] = await pool.query(
-      'DELETE FROM db_event_agenda.tbl_users WHERE id = ?',
-      [id]
-    );
+    const [rows] = await pool.query('DELETE FROM tbl_users WHERE id = ?', [id]);
     res.status(200).json(rows);
   } catch (err) {
     console.error(err);

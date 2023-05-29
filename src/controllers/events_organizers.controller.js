@@ -14,7 +14,7 @@ export const createEventOrganizer = async (req, res) => {
     const { id_event, id_organizer } = req.body;
 
     const [rows] = await pool.query(
-      'INSERT INTO db_event_agenda.tbl_event_organizers (id_event, id_organizer) VALUES (?, ?)',
+      'INSERT INTO tbl_event_organizers (id_event, id_organizer) VALUES (?, ?)',
       [id_event, id_organizer]
     );
     res.status(200).json(rows);
@@ -29,7 +29,7 @@ export const updateEventOrganizer = async (req, res) => {
     const { name, address } = req.body;
 
     const [rows] = await pool.query(
-      'UPDATE db_event_agenda.tbl_organizers SET name = ?, address = ? WHERE id = ?',
+      'UPDATE tbl_organizers SET name = ?, address = ? WHERE id = ?',
       [name, address, id]
     );
     res.status(200).json();
@@ -42,10 +42,9 @@ export const deleteEventOrganizer = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const [rows] = await pool.query(
-      'DELETE FROM db_event_agenda.tbl_organizers WHERE id = ?',
-      [id]
-    );
+    const [rows] = await pool.query('DELETE FROM tbl_organizers WHERE id = ?', [
+      id,
+    ]);
     res.status(200).json(rows);
   } catch (err) {
     res.status(500).json({ error: 'Something went wrong in the server side' });

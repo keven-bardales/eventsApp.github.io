@@ -35,7 +35,7 @@ export const createUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     const [rows] = await pool.query(
-      'INSERT INTO db_event_agenda.tbl_users (name, email, password) VALUES (?,?, ?)',
+      'INSERT INTO tbl_users (name, email, password) VALUES (?,?, ?)',
       [name, email, password]
     );
     res.json({
@@ -77,10 +77,7 @@ export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const [rows] = await pool.query(
-      'DELETE FROM db_event_agenda.tbl_users WHERE id = ?',
-      [id]
-    );
+    const [rows] = await pool.query('DELETE FROM tbl_users WHERE id = ?', [id]);
     if (rows.affectedRows != 0) {
       res.sendStatus(204);
       return;

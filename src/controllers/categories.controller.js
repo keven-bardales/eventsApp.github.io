@@ -15,7 +15,7 @@ export const createCategory = async (req, res) => {
     const { name, description } = req.body;
 
     await connection.query(
-      'INSERT INTO db_event_agenda.tbl_categories (name, description) VALUES (?, ?)',
+      'INSERT INTO tbl_categories (name, description) VALUES (?, ?)',
       [name, description]
     );
 
@@ -31,7 +31,7 @@ export const updateCategory = async (req, res) => {
     const { name, description } = req.body;
 
     await connection.query(
-      'UPDATE db_event_agenda.tbl_categories SET name = ?, description = ? WHERE id = ?',
+      'UPDATE tbl_categories SET name = ?, description = ? WHERE id = ?',
       [name, description, id]
     );
 
@@ -45,10 +45,7 @@ export const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await connection.query(
-      'DELETE FROM db_event_agenda.tbl_categories WHERE id = ?',
-      [id]
-    );
+    await connection.query('DELETE FROM tbl_categories WHERE id = ?', [id]);
 
     res.status(200).json({ success: true });
   } catch (err) {
