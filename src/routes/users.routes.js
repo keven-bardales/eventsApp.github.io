@@ -8,7 +8,7 @@ import {
 } from '../controllers/users.controllers.js';
 const router = Router();
 
-router.get('/users', res.send('Hola Mundo'));
+router.get('/users', res.json({ message: 'Hola Mundo' }));
 
 router.get('/users/:id', getUserById);
 
