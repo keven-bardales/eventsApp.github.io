@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  getUsers,
   createUser,
   updateUser,
   deleteUser,
@@ -7,7 +8,7 @@ import {
 } from '../controllers/users.controllers.js';
 const router = Router();
 
-router.get('/users', res.json({ message: 'Hola Mundo' }));
+router.get('/users', getUsers);
 
 router.get('/users/:id', getUserById);
 
