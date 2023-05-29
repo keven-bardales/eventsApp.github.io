@@ -56,6 +56,6 @@ let getdata = document.getElementById('getdata');
 
 getdata.addEventListener('click', () => {
   console.log('hlola');
-  let showEventsLink = 'http://localhost:3000/api/v1/events';
+  let showEventsLink = 'https://api-events-app.herokuapp.com/api/v1/events';
   getData(showEventsLink, showData, method.get);
 });
