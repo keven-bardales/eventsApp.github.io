@@ -54,8 +54,11 @@ function showInTable(array) {
 
 let getdata = document.getElementById('getdata');
 
+var urlHeroku = 'https://api-events-app.herokuapp.com';
+var urlLocalHost = 'http://localhost:3000';
+
 getdata.addEventListener('click', () => {
   console.log('hlola');
-  let showEventsLink = 'https://api-events-app.herokuapp.com/api/v1/events';
+  let showEventsLink = `${urlLocalHost}/api/v1/events`;
   getData(showEventsLink, showData, method.get);
 });
