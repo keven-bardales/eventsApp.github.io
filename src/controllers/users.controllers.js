@@ -1,9 +1,9 @@
-import { json } from 'express';
 import { pool } from '../dataBase.js';
 
 export const getUsers = async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM db_event_agenda.tbl_users');
+    const [rows] = await pool.query(`
+    select * from tbl_users;`);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: 'Something went wrong in the server side' });
@@ -14,7 +14,7 @@ export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const [rows] = await pool.query(
-      'SELECT id, name, email FROM tbl_users WHERE id = ?',
+      'SELECT id, name, email, avatar, password FROM tbl_users WHERE id = ?',
       [id]
     );
     if (!rows[0]) {
@@ -32,14 +32,15 @@ export const getUserById = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, avatar } = req.body;
 
     const [rows] = await pool.query(
-      'INSERT INTO tbl_users (name, email, password) VALUES (?,?, ?)',
-      [name, email, password]
+      'INSERT INTO tbl_users (name, email, password, avatar) VALUES (?, ?, SHA2(?, 256), ?)',
+      [name, email, password, avatar]
     );
-    res.json({
-      notification: `Usuario creado con exito Id: ${rows.insertId} Nombre:${name} `,
+
+    res.status(200).json({
+      notification: `User created Succesfully Id: ${rows.insertId} Nombre:${name} `,
     });
   } catch (err) {
     res.status(500).json({ error: 'Something went wrong in the server side' });
@@ -49,11 +50,11 @@ export const createUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, password } = req.body;
+    const { name, email, password, avatar } = req.body;
 
     const [rows] = await pool.query(
-      'UPDATE tbl_users SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(?, password) WHERE id = ?',
-      [name, email, password, id]
+      'UPDATE tbl_users SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(SHA2(?, 256), password),  avatar = IFNULL(?, avatar) WHERE id = ?',
+      [name, email, password, avatar, id]
     );
     if (rows.affectedRows != 0) {
       const [rows] = await pool.query(
@@ -85,6 +86,26 @@ export const deleteUser = async (req, res) => {
     res
       .status(404)
       .json({ code: 404, notification: `User with id ${id} does not exist` });
+  } catch (err) {
+    res.status(500).json({ error: 'Something went wrong in the server side' });
+  }
+};
+
+export const authUser = async (req, res) => {
+  const { email, password } = req.body;
+  console.log(email, password);
+  try {
+    const [rows] = await pool.query(`call db_event_agenda.auth_User(?,?);`, [
+      email,
+      password,
+    ]);
+    const authorized = rows[0][0].authorized;
+
+    if (authorized) {
+      res.status(200).json({ message: 'User has been authenticated' });
+    } else {
+      res.status(401).json({ message: 'Wrong user or password' });
+    }
   } catch (err) {
     res.status(500).json({ error: 'Something went wrong in the server side' });
   }

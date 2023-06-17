@@ -9,6 +9,7 @@ import locationsRoutes from './routes/locations.routes.js';
 import orgarnizerRoutes from './routes/organizer.routes.js';
 import cors from 'cors';
 import morgan from 'morgan';
+import jwt from 'jsonwebtoken';
 const app = express();
 const apiVersion = '/api/v1';
 
