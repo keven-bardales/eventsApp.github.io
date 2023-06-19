@@ -6,7 +6,7 @@ This project is a web application built with Express, Node.js, and MySQL. It pro
 
 To get started with the project, follow these steps:
 
-1. Clone the repository: [`git clone https://github.com/your-username/project-name.git`](https://github.com/keven-bardales/eventsApp_Node_Express.git)
+1. Clone the repository: [`https://github.com/keven-bardales/eventsApp_Node_Express.git`](https://github.com/keven-bardales/eventsApp_Node_Express.git)
 2. Install the dependencies: `npm install`
 3. Configure the MySQL database connection in the `.env` file. By default is on Port 3000 and I include a script to create the database in mysql.
 4. Run the application: `npm start`
