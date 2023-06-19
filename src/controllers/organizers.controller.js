@@ -52,3 +52,20 @@ export const updateOrganizer = async (req, res) => {
     res.status(500).json({ error: 'Something went wrong on the server side' });
   }
 };
+
+export const deleteOrganizer = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [rows] = await pool.query(`DELETE FROM TBL_ORGANIZERS WHERE ID = ?`, [
+      id,
+    ]);
+    if (rows.affectedRows !== 0) {
+      res.sendStatus(204);
+    } else {
+      res.status(404).json({ error: `Organizer with ID ${id} does not exist` });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Something went wrong on the server side' });
+  }
+};
