@@ -8,8 +8,9 @@ To get started with the project, follow these steps:
 
 1. Clone the repository: [`https://github.com/keven-bardales/eventsApp_Node_Express.git`](https://github.com/keven-bardales/eventsApp_Node_Express.git)
 2. Install the dependencies: `npm install`
-3. Configure the MySQL database connection in the `.env` file. By default is on Port 3000 and I include a script to create the database in mysql.
-4. Run the application: `npm start`
+3. Configure the MySQL database connection in the root folder of the repo you will find the file you can import the database to MYSQL so you can create it and
+   also you need to modify the config file for the database user and password to setup your local MySql connection.
+5. Run the application: `npm start`
 
 ## Documentation
 
