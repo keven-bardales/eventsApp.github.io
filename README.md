@@ -14,13 +14,13 @@ To get started with the project, follow these steps:
 
 ## Documentation
 
-For detailed documentation and API reference, please visit the [Swagger Documentation](https://github.com/keven-bardales/EventsApp_SWAGGER_DOCS).
+For detailed documentation and API reference, please visit the [Swagger Documentation](https://github.com/keven-bardales/EventsApp_SWAGGER_DOCS){:target="_blank"}.
 
 I would recomend cloning the swagger docs repo to test all of the endpoints of the api.
 
 ## React CRUD
 
-For the React CRUD frontend that complements this project, please visit the [React CRUD Repository](https://github.com/keven-bardales/events_App_REACT). The React CRUD application allows you to manage the data through a user-friendly interface.
+For the React CRUD frontend that complements this project, please visit the [React CRUD Repository](https://github.com/keven-bardales/events_App_REACT){:target="_blank"}. The React CRUD application allows you to manage the data through a user-friendly interface.
 
 ## Features
 
